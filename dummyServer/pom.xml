@@ -2,14 +2,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>zboDoShell</artifactId>
+        <groupId>zboDoShell</groupId>
+        <version>0.1</version>
+    </parent>
     <modelVersion>4.0.0</modelVersion>
-    <name>zbo do shell control dummy server</name>
-    <groupId>zboDoShell</groupId>
-    <packaging>pom</packaging>
-    <artifactId>zboDoShell</artifactId>
+
+    <groupId>DummyServer</groupId>
+    <artifactId>DummyServer</artifactId>
     <version>0.1</version>
-    <modules>
-        <module>dummyServer</module>
-    </modules>
+
 
 </project>
