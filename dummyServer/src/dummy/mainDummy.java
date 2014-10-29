@@ -1,3 +1,5 @@
+package dummy;
+
 /**
  * Created by twer on 14-10-26.
  */
