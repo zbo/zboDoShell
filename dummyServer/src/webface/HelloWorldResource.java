@@ -1,7 +1,8 @@
-package hello;
+package webface;
 
 import com.google.common.base.Optional;
 import com.codahale.metrics.annotation.Timed;
+import service.Saying;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -10,7 +11,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import java.util.concurrent.atomic.AtomicLong;
 
-@Path("/hello-world")
+@Path("/helloApp-world")
 @Produces(MediaType.APPLICATION_JSON)
 public class HelloWorldResource {
     private final String template;

@@ -1,8 +1,10 @@
-package hello;
+package helloApp;
 
+import healthCheck.TemplateHealthCheck;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import webface.HelloWorldResource;
 
 public class HelloWorldApplication extends Application<HelloWorldConfiguration> {
     public static void main(String[] args) throws Exception {
@@ -11,7 +13,7 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
 
     @Override
     public String getName() {
-        return "hello-world";
+        return "helloApp-world";
     }
 
     @Override

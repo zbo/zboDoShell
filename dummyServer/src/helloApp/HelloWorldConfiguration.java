@@ -1,4 +1,4 @@
-package hello;
+package helloApp;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
