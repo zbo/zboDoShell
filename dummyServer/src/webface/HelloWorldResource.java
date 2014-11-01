@@ -2,7 +2,7 @@ package webface;
 
 import com.google.common.base.Optional;
 import com.codahale.metrics.annotation.Timed;
-import service.Saying;
+import domain.Saying;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
