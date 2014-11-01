@@ -10,5 +10,6 @@
     <version>0.1</version>
     <modules>
         <module>dummyServer</module>
+        <module>lunaTest</module>
     </modules>
 </project>
