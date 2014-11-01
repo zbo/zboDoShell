@@ -5,6 +5,7 @@ import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import webface.HelloWorldResource;
+import webface.LsResource;
 
 public class HelloWorldApplication extends Application<HelloWorldConfiguration> {
     public static void main(String[] args) throws Exception {
@@ -24,14 +25,15 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
     @Override
     public void run(HelloWorldConfiguration configuration,
                     Environment environment) {
-        final HelloWorldResource resource = new HelloWorldResource(
+        final HelloWorldResource helloWorldResource = new HelloWorldResource(
                 configuration.getTemplate(),
                 configuration.getDefaultName()
         );
         final TemplateHealthCheck healthCheck =
                 new TemplateHealthCheck(configuration.getTemplate());
         environment.healthChecks().register("template", healthCheck);
-        environment.jersey().register(resource);
+        environment.jersey().register(helloWorldResource);
+        environment.jersey().register(new LsResource());
     }
 
 }

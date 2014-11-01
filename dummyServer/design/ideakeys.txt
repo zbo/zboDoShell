@@ -1,0 +1,5 @@
+cmd+alt+v = extract variable
+cmd+alt+n = inline variable
+cmd_alt+m = extract method
+shift+f6 = rename
+shift+cmd+up or down = move code

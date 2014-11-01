@@ -2,4 +2,8 @@
     1.1 使用yum模块
     1.2 需要在调用playbook时加-sudo
 2.add ls domain
-    1.1
+    2.1 发现dorpwizard不停服务，新代码不生效，在redeploy里加入remote stop
+    2.2 增加Test，发现surefile maven test插件只认识Test结尾的文件
+3.add unit test ls
+    3.1 为了不写ls的unit test加入做ls的包
+    3.2 留到functional test再做ls
