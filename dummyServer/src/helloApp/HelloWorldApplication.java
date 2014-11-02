@@ -6,6 +6,7 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import webface.HelloWorldResource;
 import webface.LsResource;
+import webface.PwdResource;
 import webface.TouchResource;
 
 public class HelloWorldApplication extends Application<HelloWorldConfiguration> {
@@ -36,6 +37,7 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
         environment.jersey().register(helloWorldResource);
         environment.jersey().register(new LsResource());
         environment.jersey().register(new TouchResource());
+        environment.jersey().register(new PwdResource());
     }
 
 }
