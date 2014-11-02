@@ -1,6 +1,7 @@
-package webface;
+package infra;
 
 import org.apache.commons.io.FileUtils;
+import webface.CommonResource;
 
 import java.io.File;
 import java.io.IOException;
