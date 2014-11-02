@@ -7,3 +7,6 @@
 3.add unit test ls
     3.1 为了不写ls的unit test加入做ls的包
     3.2 留到functional test再做ls
+4.add touch file domian
+    4.1 发现bug，没起dummy是杀进程会ansible报错，在stop.sh里加while read
+    4.2
