@@ -14,17 +14,16 @@ import java.io.File;
  */
 @Path("/dummyServer/pwd")
 @Produces(MediaType.APPLICATION_JSON)
-public class PwdResource implements CommonResource {
+public class PwdResource {
+    private final FileOperations fileOperations = new FileOperations();
+
     @GET
     @Timed
     public Pwd doGet() {
         Pwd pwd = new Pwd();
-        File userDirectory = new File(HOME_VAGRANT_INSTALL_SAVE);
-        if (!userDirectory.exists()) {
-            userDirectory.mkdir();
-        }
-
+        File userDirectory = fileOperations.getDirectory("");
         pwd.setPath(userDirectory.getPath());
         return pwd;
     }
+
 }
