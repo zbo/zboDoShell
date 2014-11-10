@@ -7,121 +7,87 @@
 // ****************************************************************************
 package safenet;
 
+import com.google.common.io.ByteStreams;
 import com.safenetinc.luna.LunaSlotManager;
-import com.safenetinc.luna.LunaUtils;
-import com.safenetinc.luna.provider.param.LunaParameterSpecOAEP;
 
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.spec.OAEPParameterSpec;
-import javax.crypto.spec.PSource;
-import javax.crypto.spec.PSource.PSpecified;
+import java.io.*;
 import java.security.Key;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
+import java.security.KeyStore;
+import java.util.Arrays;
+import java.util.Enumeration;
+
+import static com.google.common.io.BaseEncoding.base64;
+import static java.nio.charset.Charset.defaultCharset;
 
 /**
  * This sample demonstrates RSA OAEP encryption
  */
 public class RsaOAEPUsingExistKeyPair {
+    private static final int BLOCK_SIZE = 4 * 1024;
 
-    public static void main(String args[]) {
+    protected static void transform(InputStream inputStream, OutputStream outputStream, Cipher cipher) throws IOException, IllegalBlockSizeException, BadPaddingException {
+        byte[] buf = new byte[BLOCK_SIZE];
+
+        int len;
+        while ((len = ByteStreams.read(inputStream, buf, 0, BLOCK_SIZE)) == BLOCK_SIZE) {
+            outputStream.write(cipher.update(buf));
+        }
+        outputStream.write(cipher.doFinal(buf, 0, len));
+    }
+
+    public static void main(String args[]) throws Exception {
         LunaSlotManager manager;
         manager = LunaSlotManager.getInstance();
-
+        System.out.println("[version] 1.3");
         try {
             manager.login("Welcome1"); // log in to the first slot
         } catch (Exception e) {
             System.out.println("Exception during login");
         }
-        LunaSo
-        KeyPairGenerator kpg = null;
-        KeyPair myPair = null;
-        try {
-            // ********************************************
-            // need to make an rsa keypair
-            // ********************************************
-            kpg = KeyPairGenerator.getInstance("RSA", "LunaProvider");
-            kpg.initialize(1024);
-            myPair = kpg.generateKeyPair();
-        } catch (Exception e) {
-            System.out.println("Exception generating keypair");
-            e.printStackTrace();
-        }
-        byte[] input = "abc".getBytes();
-        byte[] param = "abcd".getBytes();
-        PSource paramSource = new PSpecified(param);
-        PSource badParams = new PSpecified("dcba".getBytes());
-        Cipher cipher = null;
-        Key pubKey = null;
-        Key privKey = null;
-        byte[] cipherText = null;
+        while (true) {
+            Cipher cipher = null;
+            try {
+                cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING","LunaProvider");
 
-        try {
-            cipher = Cipher.getInstance("RSA/None/OAEPWithSHA1AndMGF1Padding",
-                    "LunaProvider");
+                KeyStore keyStore;
+                keyStore = KeyStore.getInstance("Luna", "LunaProvider");
+                char[] password = "Welcome1".toCharArray();
+                keyStore.load(null, password);
+                System.out.println("[key store size] " + keyStore.size());
+                Enumeration<String> aliases = keyStore.aliases();
+                String a = "";
+                while (aliases.hasMoreElements()) {
+                    a = aliases.nextElement();
+                    System.out.println("[alias] " + a);
+                }
+                System.out.println("[key alias] " + keyStore.aliases().nextElement());
+                Key otherKey = keyStore.getKey("otherKey", "Welcome1".toCharArray());
+                Key panKey = keyStore.getKey("PANKey", "Welcome1".toCharArray());
+                Key fileKey = keyStore.getKey("fileKey", "Welcome1".toCharArray());
+                System.out.println("[out] file key is:");
+                System.out.println(otherKey.toString());
 
-            pubKey = myPair.getPublic();
-            privKey = myPair.getPrivate();
+                cipher.init(1, otherKey);
 
-            // make oaep parameter spec
-            OAEPParameterSpec oaepSpec = new OAEPParameterSpec("SHA-1", "MGF1",
-                    java.security.spec.MGF1ParameterSpec.SHA1, paramSource); // OAEPParameterSpec.DEFAULT;
-            // default should be good for us.
+                String originalText = "test for luna";
+                InputStream inputStream = new ByteArrayInputStream(originalText.getBytes());
+                final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                transform(inputStream, outputStream, cipher);
+                final byte[] encryptedString = outputStream.toByteArray();
+                System.out.println("[out] encrypted string is:");
+                System.out.println(encryptedString.toString());
 
-            // make a luna one
-            LunaParameterSpecOAEP lunaSpec = new LunaParameterSpecOAEP();
+                System.out.println("[sleep] 2s");
+                Thread.sleep(2000);
 
-            cipher.init(Cipher.ENCRYPT_MODE, pubKey, oaepSpec);
-            cipherText = cipher.doFinal(input);
-            System.out.println("cipherText: "
-                    + LunaUtils.getHexString(cipherText, true));
 
-            cipher.init(Cipher.ENCRYPT_MODE, pubKey, lunaSpec);
-            byte[] lunaBytes = cipher.doFinal(input);
-            System.out.println("luna cipher Text: "
-                    + LunaUtils.getHexString(lunaBytes, true));
-
-            // decrypt
-            cipher.init(Cipher.DECRYPT_MODE, privKey, oaepSpec);
-            byte[] decryptedText = cipher.doFinal(cipherText);
-
-            cipher.init(Cipher.DECRYPT_MODE, privKey, lunaSpec);
-            byte[] lunaDecrypted = cipher.doFinal(lunaBytes);
-
-            // display original and decrypted
-            System.out.println("  Original: " + LunaUtils.getHexString(input, true));
-            System.out.println("  decrypted: "
-                    + LunaUtils.getHexString(decryptedText, true));
-            System.out.println("  decrypted (luna spec): "
-                    + LunaUtils.getHexString(lunaDecrypted, true));
-
-        } catch (Exception e) {
-            System.out.println("*** Unexpected Exception ***");
-            e.printStackTrace();
-        }
-
-        // try a bad param spec
-        try {
-            OAEPParameterSpec badSpec = new OAEPParameterSpec("SHA-1", "MGF1",
-                    java.security.spec.MGF1ParameterSpec.SHA1, badParams);
-            cipher.init(Cipher.DECRYPT_MODE, privKey, badSpec);
-            byte[] invalidText = cipher.doFinal(cipherText);
-            System.out.println("  bad spec: "
-                    + LunaUtils.getHexString(invalidText, true));
-
-        } catch (IllegalBlockSizeException ex) {
-            // the LunaCryptokiException from the JNI layer is wrapped in an IllegalBlockSizeException
-            // to be more compatible with the JCE spec
-            if (ex.getMessage().contains("function 'C_Decrypt' returns 0x5")) {
-                System.out.println("Got expected exception from an invalid P source used during decryption.");
-            } else {
-                System.out.println("*** Unexpected Exception ***");
-                ex.printStackTrace();          
+            } catch (Exception e) {
+                e.printStackTrace();
+                continue;
             }
-        } catch (Exception e) {
-            System.out.println("*** Unexpected Exception ***");
-            e.printStackTrace();
         }
     }
 }
