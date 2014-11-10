@@ -11,5 +11,7 @@
     <modules>
         <module>dummyServer</module>
         <module>lunaTest</module>
+        <module>akkaTest</module>
+        <module>guavaTest</module>
     </modules>
 </project>
