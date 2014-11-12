@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.google.common.base.Optional;
 import domain.Ls;
 import infra.FileOperations;
+import org.apache.log4j.Logger;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -25,6 +26,8 @@ public class LsResource {
     @GET
     @Timed
     public Ls doGet(@QueryParam("path") Optional<String> path) {
+        Logger logger = Logger.getLogger(this.getClass());
+        logger.info("ls web call received");
         Ls ls = new Ls();
         String inputPath = path.or("default");
         File userDirectory = fileOperations.getDirectory(inputPath);

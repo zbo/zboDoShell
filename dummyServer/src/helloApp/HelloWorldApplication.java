@@ -4,10 +4,13 @@ import healthCheck.TemplateHealthCheck;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import org.apache.log4j.PropertyConfigurator;
 import webface.HelloWorldResource;
 import webface.LsResource;
 import webface.PwdResource;
 import webface.TouchResource;
+
+import java.util.Properties;
 
 public class HelloWorldApplication extends Application<HelloWorldConfiguration> {
     public static void main(String[] args) throws Exception {
@@ -31,6 +34,7 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
                 configuration.getTemplate(),
                 configuration.getDefaultName()
         );
+
         final TemplateHealthCheck healthCheck =
                 new TemplateHealthCheck(configuration.getTemplate());
         environment.healthChecks().register("template", healthCheck);
@@ -38,6 +42,7 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
         environment.jersey().register(new LsResource());
         environment.jersey().register(new TouchResource());
         environment.jersey().register(new PwdResource());
+
     }
 
 }

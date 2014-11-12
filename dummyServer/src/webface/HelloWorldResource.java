@@ -3,6 +3,7 @@ package webface;
 import com.google.common.base.Optional;
 import com.codahale.metrics.annotation.Timed;
 import domain.Saying;
+import org.apache.log4j.Logger;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -27,6 +28,7 @@ public class HelloWorldResource {
     @GET
     @Timed
     public Saying sayHello(@QueryParam("name") Optional<String> name) {
+        Logger.getInstance(this.getClass()).info("say hello web call received");
         final String value = String.format(template, name.or(defaultName));
         return new Saying(counter.incrementAndGet(), value);
     }

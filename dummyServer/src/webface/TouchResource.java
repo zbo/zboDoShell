@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.google.common.base.Optional;
 import domain.Touch;
 import infra.FileOperations;
+import org.apache.log4j.Logger;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -26,6 +27,7 @@ public class TouchResource {
     @Timed
     public Touch doGet(@QueryParam("path") Optional<String> path,
                        @QueryParam("name") Optional<String> name) throws IOException {
+        Logger.getInstance(this.getClass()).info("touch web call received");
         Touch touch = new Touch();
         String inputPath = path.or("default");
         String inputName = name.or("");

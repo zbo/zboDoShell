@@ -3,6 +3,7 @@ package webface;
 import com.codahale.metrics.annotation.Timed;
 import domain.Pwd;
 import infra.FileOperations;
+import org.apache.log4j.Logger;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -21,6 +22,7 @@ public class PwdResource {
     @GET
     @Timed
     public Pwd doGet() {
+        Logger.getInstance(this.getClass()).info("pwd web call received");
         Pwd pwd = new Pwd();
         File userDirectory = fileOperations.getDirectory("");
         pwd.setPath(userDirectory.getPath());

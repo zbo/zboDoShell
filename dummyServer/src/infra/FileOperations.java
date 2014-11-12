@@ -1,6 +1,7 @@
 package infra;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Logger;
 import webface.CommonResource;
 
 import java.io.File;
@@ -20,6 +21,7 @@ public class FileOperations implements IFileOperations {
 
     @Override
     public File getDirectory(String inputPath) {
+        Logger.getInstance(this.getClass()).info("get directory: "+inputPath);
         File userDirectory = new File(CommonResource.HOME_VAGRANT_INSTALL_SAVE + inputPath);
         if (!userDirectory.exists()) {
             userDirectory.mkdir();
@@ -29,6 +31,7 @@ public class FileOperations implements IFileOperations {
 
     @Override
     public Collection<File> createFile(String inputPath, String inputName) throws IOException {
+        Logger.getInstance(this.getClass()).info("create file: "+inputName+"@"+inputPath);
         File userDirectory = getDirectory(inputPath);
         File userFile = new File(HOME_VAGRANT_INSTALL_SAVE + inputPath + "/" + inputName);
         userFile.createNewFile();
