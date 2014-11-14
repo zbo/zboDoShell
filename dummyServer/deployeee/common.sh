@@ -1,4 +1,5 @@
 #!/bin/bash
-alias ansible-cmd="ansible vag -i ./hosts -m shell -a"
-alias ansible-copy="ansible vag -i ./hosts -m copy -a"
+PWD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+alias ansible-cmd="ansible vag -i ${PWD}/hosts -m shell -a"
+alias ansible-copy="ansible vag -i ${PWD}/hosts -m copy -a"
 dummyServerCodeHome=/Users/twer/project/zboDoShell/dummyServer
