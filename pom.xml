@@ -13,5 +13,6 @@
         <module>lunaTest</module>
         <module>akkaTest</module>
         <module>guavaTest</module>
+        <module>logStach</module>
     </modules>
 </project>
