@@ -1,0 +1,7 @@
+2014-11-17T02:40:48.393+0000 vagrant-centos64.vagrantup.com INFO  [2014-11-17 02:40:47,699] infra.FileOperations: get directory: zbo
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+192.168.33.10 vagrant-centos64 vagrant-centos64.vagrantup.com
+
+192.168.33.10   localhost localhost.localdomain localhost4 localhost4.localdomain4
+10.0.2.15   localhost localhost.localdomain localhost4 localhost4.localdomain4

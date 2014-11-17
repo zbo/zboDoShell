@@ -1,0 +1,10 @@
+#!/bin/bash
+PWD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+alias ansible-cmd="ansible vag -i ${PWD}/hosts -m shell -a"
+alias ansible-cmd-sudo="ansible --sudo vag -i ${PWD}/hosts -m shell -a"
+alias ansible-copy="ansible vag -i ${PWD}/hosts -m copy -a"
+alias ansible-copy-sudo="ansible --sudo vag -i ${PWD}/hosts -m copy -a"
+alias ansible-unarchive-sudo="ansible --sudo vag -i ${PWD}/hosts -m unarchive -a"
+alias ansible-unarchive="ansible vag -i ${PWD}/hosts -m unarchive -a"
+alias ansible-file="ansible vag -i ${PWD}/hosts -m file -a"
+alias ansible-file-sudo="ansible --sudo vag -i ${PWD}/hosts -m file -a"

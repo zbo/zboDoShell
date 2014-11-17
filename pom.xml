@@ -14,5 +14,6 @@
         <module>akkaTest</module>
         <module>guavaTest</module>
         <module>logStach</module>
+        <module>dbTest</module>
     </modules>
 </project>
