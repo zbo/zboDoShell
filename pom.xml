@@ -15,5 +15,6 @@
         <module>guavaTest</module>
         <module>logStach</module>
         <module>dbTest</module>
+        <module>selfmadeInjecter</module>
     </modules>
 </project>
