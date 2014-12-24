@@ -1,0 +1,41 @@
+---
+- hosts: vag
+  remote_user: vagrant
+  tasks:
+    - name: make sure folder exists
+      file: path=/home/vagrant/InstallSave/Haproxy state=directory
+
+    - name: make sure folder exists
+      sudo: yes
+      file: path=/etc/haproxy state=directory
+
+    - name: unarchive haproxy tar.gz
+      unarchive: src=/Users/twer/project/Software/haproxy-1.4.17.tar.gz dest=/home/vagrant/InstallSave/Haproxy
+
+    - name: copy make install script
+      copy: src=./makeinstall.sh dest=/home/vagrant/InstallSave/Haproxy
+
+    - name: make install binary
+      sudo: yes
+      shell: cd /home/vagrant/InstallSave/Haproxy && sh makeinstall.sh
+
+    - name: copy init.d script for haproxy service
+      sudo: yes
+      copy: src=./haproxy dest=/etc/init.d
+
+    - name: make service 755
+      sudo: yes
+      shell: chmod 755 /etc/init.d/haproxy
+
+    - name: copy conf file
+      sudo: yes
+      copy: src=./haproxy.cfg dest=/etc/haproxy
+
+    - name: copy sbin from install folder to exe sbin
+      sudo: yes
+      shell: cp /usr/local/haproxy14/sbin/haproxy /usr/local/sbin/
+
+    - name: start haproxy service
+      sudo: yes
+      service: name=haproxy state=started enabled=true
+
