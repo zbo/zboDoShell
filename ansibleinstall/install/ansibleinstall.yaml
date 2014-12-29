@@ -1,0 +1,52 @@
+---
+- hosts: vag
+  remote_user: vagrant
+  tasks:
+    - name: install python-devel
+      sudo: yes
+      yum: name=python-devel state=present
+
+    - name: make sure folder exists
+      file: path=/home/vagrant/InstallSave/Ansible state=directory
+
+    - name: make sure folder exists
+      file: path=/home/vagrant/InstallSave/Python state=directory
+
+    - name: copy sshpass
+      copy: src=./sshpass-1.05-1.el6.x86_64.rpm dest=/home/vagrant/InstallSave/Ansible/
+
+    - name: rpm install sshpass
+      sudo: yes
+      yum: name=/home/vagrant/InstallSave/Ansible/sshpass-1.05-1.el6.x86_64.rpm state=present
+
+    - name: unarchive setuptool
+      unarchive: src=/Users/twer/project/Software/setuptools-8.3.tar.gz dest=/home/vagrant/InstallSave/Python
+
+    - name: python setup setuptool
+      sudo: yes
+      shell: cd /home/vagrant/InstallSave/Python/setuptools-8.3 && python setup.py install
+
+    - name: unarchive pip
+      unarchive: src=/Users/twer/project/Software/pip-6.0.3.tar.gz dest=/home/vagrant/InstallSave/Python
+
+    - name: python setup pip
+      sudo: yes
+      shell: cd /home/vagrant/InstallSave/Python/pip-6.0.3 && python setup.py install
+
+    - name: unarchive pycrypto
+      unarchive: src=/Users/twer/project/Software/pycrypto-2.6.tar.gz dest=/home/vagrant/InstallSave/Python
+
+    - name: setup pycrypto
+      sudo: yes
+      shell: cd /home/vagrant/InstallSave/Python/pycrypto-2.6 && python setup.py install
+
+    - name: unarchive ansible
+      unarchive: src=/Users/twer/project/Software/ansible1.8.tar.gz dest=/home/vagrant/InstallSave/Ansible
+
+    - name: setup ansible
+      sudo: yes
+      shell: cd /home/vagrant/InstallSave/Ansible/ansible1.8 && python setup.py install
+
+    - name: fix ansible libgmp issue
+      sudo: yes
+      copy: src=./number.py dest=/usr/lib64/python2.6/site-packages/Crypto/Util/
