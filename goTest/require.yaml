@@ -1,0 +1,16 @@
+---
+- hosts: vag
+  remote_user: vagrant
+  tasks:
+    - name: make sure folder exists
+      copy: src=/Users/twer/project/Software/maven/ dest=/home/vagrant/InstallSave/mvn
+
+    - name: chmod 775 mvn
+      shell: "chmod 775 /home/vagrant/InstallSave/mvn/bin/mvn"
+
+    - name: copy jdk
+      copy: src=/Users/twer/project/Software/jdk-7u17-linux-x64.rpm dest=/home/vagrant/InstallSave/
+
+    - name: install jdk from a local file
+      sudo: yes
+      yum: name=/home/vagrant/InstallSave/jdk-7u17-linux-x64.rpm state=present

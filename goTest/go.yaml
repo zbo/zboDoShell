@@ -1,0 +1,34 @@
+---
+- hosts: vag
+  remote_user: vagrant
+  tasks:
+    - name: make sure folder exists
+      file: path=/home/vagrant/InstallSave/go state=directory
+
+    - name: copy kill java scripts
+      copy: src=./killgo.sh dest=/home/vagrant/InstallSave/go/
+
+    - name: copy start go server scripts
+      copy: src=./start-go.sh dest=/home/vagrant/InstallSave/go/
+
+    - name: install go server
+      unarchive: src=/Users/twer/project/Software/go-server-14.4.0-1356.zip dest=/home/vagrant/InstallSave/go/
+
+    - name: replace server.sh for java home setting
+      copy: src=./server.sh dest=/home/vagrant/InstallSave/go/go-server-14.4.0/
+
+    - name: install go agent
+      unarchive: src=/Users/twer/project/Software/go-agent-14.4.0-1356.zip dest=/home/vagrant/InstallSave/go/
+
+    - name: replace agent.sh for java home setting
+      copy: src=./agent.sh dest=/home/vagrant/InstallSave/go/go-agent-14.4.0/
+#    - name: kill go server
+#      sudo: yes
+#      command: "sh /home/vagrant/InstallSave/go/killgo.sh"
+#
+#    - name: start go server
+#      sudo: yes
+#      shell: "nohup sh /home/vagrant/InstallSave/go/start-go.sh > /home/vagrant/InstallSave/go/server.log&"
+#
+#    - name: start go agent
+#      shell: "nohup sh /home/vagrant/InstallSave/go/go-agent-14.4.0/agent.sh > /home/vagrant/InstallSave/go/agent.log&"

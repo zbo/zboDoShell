@@ -16,5 +16,6 @@
         <module>logStach</module>
         <module>dbTest</module>
         <module>selfmadeInjecter</module>
+        <module>dummyServerFT</module>
     </modules>
 </project>
