@@ -1,0 +1,89 @@
+INFO  [2014-12-30 06:00:32,752] io.dropwizard.server.ServerFactory: Starting helloApp-world
+INFO  [2014-12-30 06:00:32,821] org.eclipse.jetty.setuid.SetUIDListener: Opened application@27f4db04{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2014-12-30 06:00:32,822] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@3c56f81a{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2014-12-30 06:00:32,825] org.eclipse.jetty.server.Server: jetty-9.0.z-SNAPSHOT
+INFO  [2014-12-30 06:00:32,940] com.sun.jersey.server.impl.application.WebApplicationImpl: Initiating Jersey application, version 'Jersey: 1.18.1 02/19/2014 03:28 AM'
+INFO  [2014-12-30 06:00:33,043] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /helloApp-world (webface.HelloWorldResource)
+    GET     /dummyServer/ls (webface.LsResource)
+    GET     /dummyServer/touch (webface.TouchResource)
+    GET     /dummyServer/pwd (webface.PwdResource)
+
+INFO  [2014-12-30 06:00:33,327] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@498a2e62{/,null,AVAILABLE}
+INFO  [2014-12-30 06:00:33,329] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2014-12-30 06:00:33,333] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@a59fb35{/,null,AVAILABLE}
+INFO  [2014-12-30 06:00:33,349] org.eclipse.jetty.server.ServerConnector: Started application@27f4db04{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2014-12-30 06:00:33,350] org.eclipse.jetty.server.ServerConnector: Started admin@3c56f81a{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2014-12-30 06:01:08,549] webface.HelloWorldResource: say hello web call received
+INFO  [2014-12-30 06:01:10,075] webface.HelloWorldResource: say hello web call received
+INFO  [2014-12-30 06:01:14,907] webface.PwdResource: pwd web call received
+INFO  [2014-12-30 06:01:14,907] infra.FileOperations: get directory: 
+INFO  [2014-12-30 06:01:30,405] webface.PwdResource: pwd web call received
+INFO  [2014-12-30 06:01:30,405] infra.FileOperations: get directory: 
+INFO  [2014-12-30 06:02:17,989] webface.TouchResource: touch web call received
+INFO  [2014-12-30 06:02:17,989] infra.FileOperations: get directory: zbo
+INFO  [2014-12-30 06:02:18,012] infra.FileOperations: create file: bob.txt@zbo
+INFO  [2014-12-30 06:02:18,012] infra.FileOperations: get directory: zbo
+ERROR [2014-12-30 06:02:18,050] io.dropwizard.jersey.errors.LoggingExceptionMapper: Error handling a request: b0bc44ca5ee76884
+! java.io.IOException: No such file or directory
+! at java.io.UnixFileSystem.createFileExclusively(Native Method) ~[na:1.7.0_55]
+! at java.io.File.createNewFile(File.java:1006) ~[na:1.7.0_55]
+! at infra.FileOperations.createFile(FileOperations.java:37) ~[dummyServer-0.1.jar:0.1]
+! at webface.TouchResource.doGet(TouchResource.java:35) ~[dummyServer-0.1.jar:0.1]
+! at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.7.0_55]
+! at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57) ~[na:1.7.0_55]
+! at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.7.0_55]
+! at java.lang.reflect.Method.invoke(Method.java:606) ~[na:1.7.0_55]
+! at com.sun.jersey.spi.container.JavaMethodInvokerFactory$1.invoke(JavaMethodInvokerFactory.java:60) ~[dummyServer-0.1.jar:0.1]
+! at com.sun.jersey.server.impl.model.method.dispatch.AbstractResourceMethodDispatchProvider$TypeOutInvoker._dispatch(AbstractResourceMethodDispatchProvider.java:185) ~[dummyServer-0.1.jar:0.1]
+! at com.sun.jersey.server.impl.model.method.dispatch.ResourceJavaMethodDispatcher.dispatch(ResourceJavaMethodDispatcher.java:75) ~[dummyServer-0.1.jar:0.1]
+! at com.codahale.metrics.jersey.InstrumentedResourceMethodDispatchProvider$TimedRequestDispatcher.dispatch(InstrumentedResourceMethodDispatchProvider.java:30) ~[dummyServer-0.1.jar:0.1]
+! at io.dropwizard.jersey.guava.OptionalResourceMethodDispatchAdapter$OptionalRequestDispatcher.dispatch(OptionalResourceMethodDispatchAdapter.java:37) ~[dummyServer-0.1.jar:0.1]
+! at com.sun.jersey.server.impl.uri.rules.HttpMethodRule.accept(HttpMethodRule.java:302) ~[dummyServer-0.1.jar:0.1]
+! at com.sun.jersey.server.impl.uri.rules.ResourceObjectRule.accept(ResourceObjectRule.java:100) ~[dummyServer-0.1.jar:0.1]
+! at com.sun.jersey.server.impl.uri.rules.RightHandPathRule.accept(RightHandPathRule.java:147) ~[dummyServer-0.1.jar:0.1]
+! at com.sun.jersey.server.impl.uri.rules.RootResourceClassesRule.accept(RootResourceClassesRule.java:84) ~[dummyServer-0.1.jar:0.1]
+! at com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1542) [dummyServer-0.1.jar:0.1]
+! at com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1473) [dummyServer-0.1.jar:0.1]
+! at com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1419) [dummyServer-0.1.jar:0.1]
+! at com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1409) [dummyServer-0.1.jar:0.1]
+! at com.sun.jersey.spi.container.servlet.WebComponent.service(WebComponent.java:409) [dummyServer-0.1.jar:0.1]
+! at com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:540) [dummyServer-0.1.jar:0.1]
+! at com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:715) [dummyServer-0.1.jar:0.1]
+! at javax.servlet.http.HttpServlet.service(HttpServlet.java:848) [dummyServer-0.1.jar:0.1]
+! at io.dropwizard.jetty.NonblockingServletHolder.handle(NonblockingServletHolder.java:49) [dummyServer-0.1.jar:0.1]
+! at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1515) [dummyServer-0.1.jar:0.1]
+! at org.eclipse.jetty.servlets.UserAgentFilter.doFilter(UserAgentFilter.java:83) [dummyServer-0.1.jar:0.1]
+! at org.eclipse.jetty.servlets.GzipFilter.doFilter(GzipFilter.java:348) [dummyServer-0.1.jar:0.1]
+! at io.dropwizard.jetty.BiDiGzipFilter.doFilter(BiDiGzipFilter.java:127) [dummyServer-0.1.jar:0.1]
+! at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1486) [dummyServer-0.1.jar:0.1]
+! at io.dropwizard.servlets.ThreadNameFilter.doFilter(ThreadNameFilter.java:29) [dummyServer-0.1.jar:0.1]
+! at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1486) [dummyServer-0.1.jar:0.1]
+! at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:519) [dummyServer-0.1.jar:0.1]
+! at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1097) [dummyServer-0.1.jar:0.1]
+! at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:448) [dummyServer-0.1.jar:0.1]
+! at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1031) [dummyServer-0.1.jar:0.1]
+! at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:136) [dummyServer-0.1.jar:0.1]
+! at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97) [dummyServer-0.1.jar:0.1]
+! at com.codahale.metrics.jetty9.InstrumentedHandler.handle(InstrumentedHandler.java:173) [dummyServer-0.1.jar:0.1]
+! at io.dropwizard.jetty.RoutingHandler.handle(RoutingHandler.java:51) [dummyServer-0.1.jar:0.1]
+! at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97) [dummyServer-0.1.jar:0.1]
+! at org.eclipse.jetty.server.handler.RequestLogHandler.handle(RequestLogHandler.java:92) [dummyServer-0.1.jar:0.1]
+! at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97) [dummyServer-0.1.jar:0.1]
+! at org.eclipse.jetty.server.handler.StatisticsHandler.handle(StatisticsHandler.java:162) [dummyServer-0.1.jar:0.1]
+! at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97) [dummyServer-0.1.jar:0.1]
+! at org.eclipse.jetty.server.Server.handle(Server.java:446) [dummyServer-0.1.jar:0.1]
+! at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:271) [dummyServer-0.1.jar:0.1]
+! at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:246) [dummyServer-0.1.jar:0.1]
+! at org.eclipse.jetty.io.AbstractConnection$ReadCallback.run(AbstractConnection.java:358) [dummyServer-0.1.jar:0.1]
+! at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:601) [dummyServer-0.1.jar:0.1]
+! at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:532) [dummyServer-0.1.jar:0.1]
+! at java.lang.Thread.run(Thread.java:745) [na:1.7.0_55]
+INFO  [2014-12-30 06:08:51,823] org.eclipse.jetty.server.ServerConnector: Stopped application@27f4db04{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2014-12-30 06:08:51,823] org.eclipse.jetty.server.ServerConnector: Stopped admin@3c56f81a{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2014-12-30 06:08:51,825] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@a59fb35{/,null,UNAVAILABLE}
+INFO  [2014-12-30 06:08:51,825] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@498a2e62{/,null,UNAVAILABLE}
