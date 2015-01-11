@@ -1,0 +1,8 @@
+---
+- name: install httpd 2.2.15
+  file: path=/home/vagrant/InstallSave/Httpd state=directory
+- name: copy rpm
+  copy: src=/Users/twer/project/Software/httpd-2.2.15-39.el6.centos.x86_64.rpm dest=/home/vagrant/InstallSave/Httpd/
+- name: rpm install
+  sudo: yes
+  yum:  name=/home/vagrant/InstallSave/Httpd/httpd-2.2.15-39.el6.centos.x86_64.rpm state=present

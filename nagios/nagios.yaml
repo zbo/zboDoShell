@@ -1,0 +1,10 @@
+---
+- hosts: vag
+  remote_user: vagrant
+
+  roles:
+  - install-httpd
+  - install-gcc
+  - install-php
+  - install-gd
+  - install-user-group

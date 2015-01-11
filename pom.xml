@@ -17,5 +17,7 @@
         <module>dbTest</module>
         <module>selfmadeInjecter</module>
         <module>dummyServerFT</module>
+        <module>handleCtrlc</module>
+        <module>finallyTest</module>
     </modules>
 </project>

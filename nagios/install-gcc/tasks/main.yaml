@@ -1,0 +1,4 @@
+---
+- name: yum install gcc
+  sudo: yes
+  yum:  name=gcc,glibc state=present

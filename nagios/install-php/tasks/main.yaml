@@ -1,0 +1,4 @@
+---
+- name: yum install php 5.3.3
+  sudo: yes
+  yum:  name=php state=present

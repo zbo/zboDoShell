@@ -1,0 +1,13 @@
+---
+- name: add group nagcmd
+  sudo: yes
+  group: name=nagcmd state=present
+
+- name: add nagios user
+  sudo: yes
+  user: name=nagios shell=/bin/bash groups=nagcmd append=yes
+
+- name: change password -p not work
+  sudo: yes
+  shell: echo nagios|sudo passwd nagios --stdin
+

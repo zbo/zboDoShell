@@ -1,0 +1,4 @@
+---
+- name: yum install gd gd-devel 2.0.35
+  sudo: yes
+  yum:  name=gd,gd-devel state=present
