@@ -26,43 +26,31 @@
       unarchive: src=/Users/twer/project/Software/logstash-1.4.2.tar.gz dest=/home/vagrant/InstallSave/ELK/Logstash
 
     - name: make sure kibana folder exists
-      file: path=/home/vagrant/InstallSave/ELK/kibana state=directory
+      file: path=/home/vagrant/InstallSave/ELK/Kibana state=directory
 
     - name: copy kibana
       unarchive: src=/Users/twer/project/Software/kibana.zip dest=/home/vagrant/InstallSave/ELK/Kibana
 
+    - name: make sure nodejs folder exists
+      file: path=/home/vagrant/InstallSave/ELK/NodeJS state=directory
 
-#    - name: make sure folder exists
-#      sudo: yes
-#      file: path=/etc/haproxy state=directory
-#
-#    - name: unarchive haproxy tar.gz
-#      unarchive: src=/Users/twer/project/Software/haproxy-1.4.17.tar.gz dest=/home/vagrant/InstallSave/Haproxy
-#
-#    - name: copy make install script
-#      copy: src=./makeinstall.sh dest=/home/vagrant/InstallSave/Haproxy
-#
-#    - name: make install binary
-#      sudo: yes
-#      shell: cd /home/vagrant/InstallSave/Haproxy && sh makeinstall.sh
-#
-#    - name: copy init.d script for haproxy service
-#      sudo: yes
-#      copy: src=./haproxy dest=/etc/init.d
-#
-#    - name: make service 755
-#      sudo: yes
-#      shell: chmod 755 /etc/init.d/haproxy
-#
-#    - name: copy conf file
-#      sudo: yes
-#      copy: src=./haproxy.cfg dest=/etc/haproxy
-#
-#    - name: copy sbin from install folder to exe sbin
-#      sudo: yes
-#      shell: cp /usr/local/haproxy14/sbin/haproxy /usr/local/sbin/
-#
-#    - name: start haproxy service
-#      sudo: yes
-#      service: name=haproxy state=started enabled=true
+    - name: copy nodejs
+      unarchive: src=/Users/twer/project/Software/node-v0.12.2-linux-x64.tar.gz dest=/home/vagrant/InstallSave/ELK/NodeJS
 
+    - name: add gw filter
+      copy: src=/Users/twer/project/zboDoShell/ELK/gw.rb dest=/home/vagrant/InstallSave/ELK/Logstash/logstash-1.4.2/lib/logstash/filters
+
+    - name: add gw conf
+      copy: src=/Users/twer/project/zboDoShell/ELK/gw.conf dest=/home/vagrant/InstallSave/ELK
+
+    - name: copy pufa log
+      copy: src=/Users/twer/project/Software/gwtran.log dest=/home/vagrant/InstallSave/ELK
+
+    - name: copy start logstash shell
+      copy: src=/Users/twer/project/zboDoShell/ELK/start-logstash.sh dest=/home/vagrant/InstallSave/ELK
+
+    - name: copy start kibana shell
+      copy: src=/Users/twer/project/zboDoShell/ELK/start-kibana.sh dest=/home/vagrant/InstallSave/ELK
+
+    - name: check elastic search alive
+      shell: curl -XGET 'localhost:9200/'
