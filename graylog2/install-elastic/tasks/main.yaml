@@ -1,0 +1,8 @@
+---
+- name: clear elastic-search folder
+  shell: rm -rf {{install_folder}}elasstic-search && mkdir {{install_folder}}elasstic-search
+
+- name: copy files
+  unarchive: src={{software_save}}elasticsearch-1.4.0.tar.gz dest={{install_folder}}elasstic-search
+
+

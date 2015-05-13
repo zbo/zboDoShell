@@ -2,5 +2,5 @@
 - hosts: vag
   remote_user: vagrant
   tasks:
-    - name: install jdk from a local file
+    - name: install httpd from a local file
       yum: name=/home/vagrant/InstallSave/httpd-2.2.15-39.el6.centos.x86_64.rpm state=present

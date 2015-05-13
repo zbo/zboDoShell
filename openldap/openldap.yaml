@@ -1,0 +1,7 @@
+---
+- hosts: vag
+  remote_user: vagrant
+
+  roles:
+  - install-gcc
+  - install-ldap

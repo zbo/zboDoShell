@@ -1,0 +1,7 @@
+---
+- hosts: vag240
+  remote_user: root
+
+  roles:
+  - clear-all
+  - install-elastic

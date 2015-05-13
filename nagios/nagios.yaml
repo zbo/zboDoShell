@@ -8,3 +8,4 @@
   - install-php
   - install-gd
   - install-user-group
+  - install-nagios

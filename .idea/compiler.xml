@@ -26,6 +26,7 @@
         <module name="dbTest" />
         <module name="dummyServer" />
         <module name="dummyServerFT" />
+        <module name="finallyTest" />
         <module name="guavaTest" />
         <module name="handleCtrlc" />
         <module name="lunaTest" />

@@ -7,6 +7,10 @@
   sudo: yes
   user: name=nagios shell=/bin/bash groups=nagcmd append=yes
 
+- name: add apache user
+  sudo: yes
+  user: name=apache shell=/bin/bash groups=nagcmd append=yes
+
 - name: change password -p not work
   sudo: yes
   shell: echo nagios|sudo passwd nagios --stdin

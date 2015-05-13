@@ -1,0 +1,34 @@
+---
+- name: unarchiva nagios
+  unarchive:  src=/Users/twer/project/Software/nagios-3.2.3.tar.gz dest=/home/vagrant/InstallSave/
+
+- name: unarchive nagios plugin
+  unarchive:  src=/Users/twer/project/Software/nagios-plugins-2.0.3.tar.gz dest=/home/vagrant/InstallSave/
+
+- name: make nagios
+  sudo: yes
+  shell: cd /home/vagrant/InstallSave/nagios-3.2.3 && ./configure --with-command-group=nagcmd && make all && make install && make install-init && make install-config && make install-commandmode
+
+- name: config nagios
+  sudo: yes
+  shell: cd /home/vagrant/InstallSave/nagios-3.2.3 && make install-webconf
+
+  #set password using: htpasswd -c /usr/local/nagios/etc/htpasswd.users nagiosadmin
+  #service httpd restart
+  #Compile and install the plugins.
+  #./configure --with-nagios-user=nagios --with-nagios-group=nagios
+  #make
+  #make install
+  #chkconfig --add nagios
+  #chkconfig nagios on
+  #Verify the sample Nagios configuration files.
+  #/usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  #If there are no errors, start Nagios.
+  #service nagios start
+  #http://localhost/nagios/
+  #nagiosadmin 123456
+
+
+
+
+

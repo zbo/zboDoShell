@@ -1,0 +1,10 @@
+---
+- name: ensure ldap folder exist
+  file: path=/home/vagrant/InstallSave/ldap state=directory
+- name: copy ldap source code
+  unarchive:  src=/Users/twer/project/Software/openldap-2.4.40.tgz dest=/home/vagrant/InstallSave/ldap/
+
+#yum install db4-devel
+#./configure
+#make depend
+#make

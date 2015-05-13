@@ -1,0 +1,2 @@
+[vag240]
+10.1.17.240 ansible_ssh_user=root ansible_ssh_pass=redhat ansible_sudo_pass=redhat

@@ -1,0 +1,10 @@
+---
+- name: clear folder
+  shell: rm -rf {{install_folder}} && mkdir {{install_folder}}
+
+- name: copy kill script
+  copy: src=./resources/killjava.sh dest={{install_folder}}
+
+- name: kill java process
+  sudo: yes
+  shell: sh {{install_folder}}killjava.sh &
