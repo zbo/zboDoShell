@@ -22,7 +22,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="akkaTest" />
         <module name="dbTest" />
         <module name="dummyServer" />
         <module name="dummyServerFT" />
@@ -31,11 +30,27 @@
         <module name="handleCtrlc" />
         <module name="lunaTest" />
         <module name="selfmadeInjecter" />
+        <module name="tiffconvert" />
+      </profile>
+      <profile default="false" name="Annotation profile for akkaTest" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="akkaTest" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="akkaTest" target="1.6" />
+      <module name="dbTest" target="1.5" />
+      <module name="dummyServer" target="1.5" />
+      <module name="dummyServerFT" target="1.5" />
+      <module name="finallyTest" target="1.5" />
+      <module name="guavaTest" target="1.5" />
+      <module name="handleCtrlc" target="1.5" />
+      <module name="lunaTest" target="1.5" />
+      <module name="tiffconvert" target="1.5" />
+      <module name="zboDoShell" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
-

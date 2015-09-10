@@ -19,5 +19,6 @@
         <module>dummyServerFT</module>
         <module>handleCtrlc</module>
         <module>finallyTest</module>
+        <module>tiffconvert</module>
     </modules>
 </project>
