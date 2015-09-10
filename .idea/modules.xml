@@ -10,8 +10,8 @@
       <module fileurl="file://$PROJECT_DIR$/guavaTest/guavaTest.iml" filepath="$PROJECT_DIR$/guavaTest/guavaTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/handleCtrlc/handleCtrlc.iml" filepath="$PROJECT_DIR$/handleCtrlc/handleCtrlc.iml" />
       <module fileurl="file://$PROJECT_DIR$/lunaTest/lunaTest.iml" filepath="$PROJECT_DIR$/lunaTest/lunaTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tiffconvert/tiffconvert.iml" filepath="$PROJECT_DIR$/tiffconvert/tiffconvert.iml" />
       <module fileurl="file://$PROJECT_DIR$/zboDoShell.iml" filepath="$PROJECT_DIR$/zboDoShell.iml" />
     </modules>
   </component>
 </project>
-
