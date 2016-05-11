@@ -1,0 +1,74 @@
+---
+- hosts: vag-vm2
+  remote_user: vagrant
+  tasks:
+    - name: change host name
+      sudo: yes
+      lineinfile: dest=/etc/sysconfig/network state=present insertafter="EOF" line="HOSTNAME=VM2"
+    - name: change host name
+      sudo: yes
+      lineinfile: dest=/etc/hosts state=present insertafter="EOF" line="192.168.33.10 VM1"
+    - name: change host name
+      sudo: yes
+      lineinfile: dest=/etc/hosts state=present insertafter="EOF" line="192.168.33.11 VM2"
+    - name: change host name
+      sudo: yes
+      # virtual box 10.0.2.3 from resolve.conf, dns server is exactly the host machine
+      lineinfile: dest=/etc/hosts state=present insertafter="EOF" line="10.0.2.3 master.zbo.com"
+    - name: install puppet client
+      sudo: yes
+      shell: curl -k https://master.zbo.com:8140/packages/current/install.bash | sudo bash
+    - name: puppet sync
+      sudo: yes
+      shell: /opt/puppetlabs/bin/puppet agent --test
+
+
+#    - name: copy java
+#      copy: src=/Users/twer/project/Software/jdk-7u17-linux-x64.rpm dest=/home/vagrant/InstallSave/ELK
+#
+#    - name: copy elastic search
+#      copy: src=/Users/twer/project/Software/elasticsearch-1.5.2.noarch.rpm dest=/home/vagrant/InstallSave/ELK
+#
+#    - name: rpm install java
+#      sudo: yes
+#      yum: name=/home/vagrant/InstallSave/ELK/jdk-7u17-linux-x64.rpm state=present
+#
+#    - name: rpm install elastic search
+#      sudo: yes
+#      yum: name=/home/vagrant/InstallSave/ELK/elasticsearch-1.5.2.noarch.rpm state=present
+#
+#    - name: make sure logstash folder exists
+#      file: path=/home/vagrant/InstallSave/ELK/Logstash state=directory
+#
+#    - name: copy logstash
+#      unarchive: src=/Users/twer/project/Software/logstash-1.4.2.tar.gz dest=/home/vagrant/InstallSave/ELK/Logstash
+#
+#    - name: make sure kibana folder exists
+#      file: path=/home/vagrant/InstallSave/ELK/Kibana state=directory
+#
+#    - name: copy kibana
+#      unarchive: src=/Users/twer/project/Software/kibana.zip dest=/home/vagrant/InstallSave/ELK/Kibana
+#
+#    - name: make sure nodejs folder exists
+#      file: path=/home/vagrant/InstallSave/ELK/NodeJS state=directory
+#
+#    - name: copy nodejs
+#      unarchive: src=/Users/twer/project/Software/node-v0.12.2-linux-x64.tar.gz dest=/home/vagrant/InstallSave/ELK/NodeJS
+#
+#    - name: add gw filter
+#      copy: src=/Users/twer/project/zboDoShell/ELK/gw.rb dest=/home/vagrant/InstallSave/ELK/Logstash/logstash-1.4.2/lib/logstash/filters
+#
+#    - name: add gw conf
+#      copy: src=/Users/twer/project/zboDoShell/ELK/gw.conf dest=/home/vagrant/InstallSave/ELK
+#
+#    - name: copy pufa log
+#      copy: src=/Users/twer/project/Software/gwtran.log dest=/home/vagrant/InstallSave/ELK
+#
+#    - name: copy start logstash shell
+#      copy: src=/Users/twer/project/zboDoShell/ELK/start-logstash.sh dest=/home/vagrant/InstallSave/ELK
+#
+#    - name: copy start kibana shell
+#      copy: src=/Users/twer/project/zboDoShell/ELK/start-kibana.sh dest=/home/vagrant/InstallSave/ELK
+#
+#    - name: check elastic search alive
+#      shell: curl -XGET 'localhost:9200/'

@@ -1,0 +1,10 @@
+---
+- hosts: vag-vm1
+  remote_user: vagrant
+  tasks:
+    - include: PuppetVM_Base.yaml
+      vars:
+          vm_name: vm1.vm1
+          vm1_vm1: 192.168.33.10 vm1.vm1
+          vm2_vm2: 192.168.33.11 vm2.vm2
+          vm3_vm3: 192.168.33.12 vm3.vm3

@@ -20,5 +20,6 @@
         <module>handleCtrlc</module>
         <module>finallyTest</module>
         <module>tiffconvert</module>
+        <module>Puppet</module>
     </modules>
 </project>

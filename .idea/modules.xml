@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Puppet/Puppet.iml" filepath="$PROJECT_DIR$/Puppet/Puppet.iml" />
       <module fileurl="file://$PROJECT_DIR$/akkaTest/akkaTest.iml" filepath="$PROJECT_DIR$/akkaTest/akkaTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/dbTest/dbTest.iml" filepath="$PROJECT_DIR$/dbTest/dbTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/dummyServer/dummyServer.iml" filepath="$PROJECT_DIR$/dummyServer/dummyServer.iml" />

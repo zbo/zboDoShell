@@ -1,0 +1,20 @@
+---
+    - name: change host name
+      sudo: yes
+      lineinfile: dest=/etc/sysconfig/network state=present insertafter="EOF" line="HOSTNAME={{vm_name}}"
+    - name: change host name
+      sudo: yes
+      lineinfile: dest=/etc/hosts state=present insertafter="EOF" line="{{vm1_vm1}}"
+    - name: change host name
+      sudo: yes
+      lineinfile: dest=/etc/hosts state=present insertafter="EOF" line="{{vm2_vm2}}"
+    - name: change host name
+      sudo: yes
+      lineinfile: dest=/etc/hosts state=present insertafter="EOF" line="{{vm3_vm3}}"
+    - name: make sure folder exists
+      file: path=/home/vagrant/InstallSave state=directory
+    - name: copy puppet.sh
+      copy: src=./files/puppet.sh dest=/home/vagrant/InstallSave/
+    - name: install puppet
+      sudo: yes
+      shell: sh /home/vagrant/InstallSave/puppet.sh

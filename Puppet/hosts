@@ -1,0 +1,6 @@
+[vag-vm1]
+192.168.33.10 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant ansible_sudo_pass=vagrant
+[vag-vm2]
+192.168.33.11 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant ansible_sudo_pass=vagrant
+[vag-vm3]
+192.168.33.12 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant ansible_sudo_pass=vagrant
