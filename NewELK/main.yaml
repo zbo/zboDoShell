@@ -1,0 +1,24 @@
+---
+- hosts: vag
+  remote_user: vagrant
+  tasks:
+    - include: install.yaml
+    - copy: src=./files/logstash.conf dest=/home/vagrant
+    - copy: src=./files/run-logstash.sh dest=/home/vagrant
+    - copy: src=./files/run-elasticsearch.sh dest=/home/vagrant
+    - copy: src=./files/run-all.sh dest=/home/vagrant
+    - copy: src=./files/kill-all.sh dest=/home/vagrant
+    - copy: src=./files/kibana.yml dest=/home/vagrant/InstallSave/ELK/kibana-4.5.1-linux-x64/config/
+    - name: stop fire wall
+      sudo: yes
+      shell: systemctl stop firewalld.service
+    - name: install head plugin
+      sudo: yes
+      unarchive: src=./files/head.tar.gz dest=/usr/share/elasticsearch/plugins
+    - name: chmod elastic
+      sudo: yes
+      shell: chmod -R 777 /usr/share/elasticsearch
+    - name: run all
+      shell: sh /home/vagrant/run-all.sh
+    - name: check elastic search alive
+      shell: curl -XGET '192.168.33.13:9200/'

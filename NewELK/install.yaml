@@ -1,0 +1,19 @@
+---
+    - file: path=/home/vagrant/InstallSave/ELK state=directory
+    - file: path=/home/vagrant/Opt state=directory
+    - copy: src=/home/zbo/Downloads/jdk-7u80-linux-x64.rpm dest=/home/vagrant/InstallSave/ELK
+    - name: rpm install jdk
+      sudo: yes
+      yum: name=/home/vagrant/InstallSave/ELK/jdk-7u80-linux-x64.rpm state=present
+    - copy: src=/home/zbo/Downloads/logstash-2.3.2-1.noarch.rpm dest=/home/vagrant/InstallSave/ELK
+    - name: rpm install logstash
+      sudo: yes
+      yum: name=/home/vagrant/InstallSave/ELK/logstash-2.3.2-1.noarch.rpm state=present
+    - copy: src=/home/zbo/Downloads/elasticsearch-2.3.3.rpm dest=/home/vagrant/InstallSave/ELK
+    - name: rpm install elastic search
+      sudo: yes
+      yum: name=/home/vagrant/InstallSave/ELK/elasticsearch-2.3.3.rpm state=present
+    - name: create config dir
+      sudo: yes
+      file: path=/usr/share/elasticsearch/config state=directory
+    - unarchive: src=/home/zbo/Downloads/kibana-4.5.1-linux-x64.tar.gz dest=/home/vagrant/InstallSave/ELK

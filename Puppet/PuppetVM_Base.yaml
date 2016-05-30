@@ -15,6 +15,9 @@
       file: path=/home/vagrant/InstallSave state=directory
     - name: copy puppet.sh
       copy: src=./files/puppet.sh dest=/home/vagrant/InstallSave/
+    - name: stop fire wall
+      sudo: yes
+      shell: systemctl stop firewalld.service
     - name: install puppet
       sudo: yes
       shell: sh /home/vagrant/InstallSave/puppet.sh

@@ -4,4 +4,4 @@ alias ansible-cmd="ansible vag -i ${PWD}/hosts -m shell -a"
 alias ansible-cmd-sudo="ansible --sudo vag -i ${PWD}/hosts -m shell -a"
 alias ansible-copy="ansible vag -i ${PWD}/hosts -m copy -a"
 alias ansible-copy-sudo="ansible --sudo vag -i ${PWD}/hosts -m copy -a"
-dummyServerCodeHome=/Users/twer/project/zboDoShell/dummyServer
+dummyServerCodeHome=/home/zbo/Code/zboDoShell/dummyServer
