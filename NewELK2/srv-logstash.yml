@@ -1,0 +1,5 @@
+---
+    - hosts: vag-ls-1
+      remote_user: vagrant
+      roles:
+        - logstash

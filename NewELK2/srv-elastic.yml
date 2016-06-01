@@ -1,0 +1,5 @@
+---
+    - hosts: vag-elastic-1,vag-elastic-2
+      remote_user: vagrant
+      roles:
+        - elastic

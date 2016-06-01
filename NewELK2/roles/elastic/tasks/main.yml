@@ -1,0 +1,33 @@
+---
+# This will install elastic search
+    - copy: src=/home/zbo/Downloads/elasticsearch-2.3.3.rpm dest=/home/vagrant/InstallSave/ELK
+    - name: rpm install elastic search
+      sudo: yes
+      yum: name=/home/vagrant/InstallSave/ELK/elasticsearch-2.3.3.rpm state=present
+    - name: create config dir
+      sudo: yes
+      file: path=/usr/share/elasticsearch/config state=directory
+
+    - name: chmod elastic
+      sudo: yes
+      shell: chmod -R 777 /usr/share/elasticsearch
+
+    - name: install head plugin
+      sudo: yes
+      unarchive: src=head.tar.gz dest=/usr/share/elasticsearch/plugins
+
+    - unarchive: src=/home/zbo/Downloads/kibana-4.5.1-linux-x64.tar.gz dest=/home/vagrant/InstallSave/ELK
+    - template: src=kibana.yml dest=/home/vagrant/InstallSave/ELK/kibana-4.5.1-linux-x64/config/
+#    - template: src=restart-e.sh dest=/home/vagrant/restart-e.sh
+#    - template: src=restart-k.sh dest=/home/vagrant/restart-k.sh
+#      notify: restart elastic
+#    - name: restart elastic
+#      shell: sh restart-e.sh
+#    - name: restart kibana
+#      shell: sh restart-k.sh
+    - unarchive: src=/home/zbo/Downloads/elasticsearch-2.3.3.tar.gz dest=/home/vagrant/
+    - template: src=elasticsearch.yml dest=/home/vagrant/elasticsearch-2.3.3/config/
+    - copy: src=kill-e.sh dest=/home/vagrant/kill-e.sh
+    - copy: src=start-e.sh dest=/home/vagrant/start-e.sh
+    - unarchive: src=head.tar.gz dest=/home/vagrant/elasticsearch-2.3.3/plugins
+    - shell: sh /home/vagrant/start-e.sh

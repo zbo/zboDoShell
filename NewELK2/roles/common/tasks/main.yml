@@ -1,0 +1,11 @@
+---
+# This playbook contains common plays that will be run on all nodes.
+    - file: path=/home/vagrant/InstallSave/ELK state=directory
+    - file: path=/home/vagrant/Opt state=directory
+    - copy: src=/home/zbo/Downloads/jdk-7u80-linux-x64.rpm dest=/home/vagrant/InstallSave/ELK
+    - name: rpm install jdk
+      sudo: yes
+      yum: name=/home/vagrant/InstallSave/ELK/jdk-7u80-linux-x64.rpm state=present
+    - name: stop fire wall
+      sudo: yes
+      shell: systemctl stop firewalld.service

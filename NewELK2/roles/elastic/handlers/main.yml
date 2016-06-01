@@ -1,0 +1,4 @@
+---
+# handlers for logstash
+- name: restart elastic
+  shell: sh /home/vagrant/restart-e.sh

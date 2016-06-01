@@ -1,0 +1,32 @@
+input {
+    stdin {}
+    file {
+        path => "{{log_path}}"
+        start_position => end #beginning
+        ignore_older => 0
+    }
+}
+filter {
+    multiline {
+        pattern => "^%{LOGLEVEL}"
+        negate => true
+        what => previous
+    }
+    grok {
+        match =>[
+            "message", "%{LOGLEVEL:level}\s+\[%{TIMESTAMP_ISO8601:timepoint}\]\s+%{JAVACLASS:classname}\: %{GREEDYDATA:info}"
+        ]
+        overwrite => ["message"]
+    }
+    date {
+        match => [ "timestamp" , "dd/MMM/yyyy:HH:mm:ss Z" ]
+    }
+}
+output{
+    elasticsearch {
+        action => "index"
+        hosts  => "{{elastic_search_2}}:{{elastic_search_2_port}}"
+        index  => "{{index_name}}"
+    }
+    stdout {codec=>rubydebug}
+}

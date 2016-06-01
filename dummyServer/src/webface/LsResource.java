@@ -34,7 +34,8 @@ public class LsResource {
         Collection<File> list = fileOperations.getFiles(userDirectory);
         ls.setPath(userDirectory.getPath());
         ls.setContent(list.toString());
-        return ls;
+        throw new RuntimeException("this is test exception!");
+//        return ls;
     }
 
 }

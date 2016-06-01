@@ -1,0 +1,4 @@
+---
+# handlers for logstash
+- name: restart logstash
+  shell: nohup sh restart.sh &

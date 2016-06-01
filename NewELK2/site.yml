@@ -1,0 +1,10 @@
+---
+# This playbook deploys the whole application stack in this site.  
+- include: srv-common.yml
+- include: srv-logstash.yml
+- include: srv-elastic.yml
+
+
+
+
+

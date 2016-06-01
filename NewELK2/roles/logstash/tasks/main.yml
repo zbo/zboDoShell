@@ -1,0 +1,13 @@
+---
+# This will install logstash
+    - copy: src=/home/zbo/Downloads/logstash-2.3.2-1.noarch.rpm dest=/home/vagrant/InstallSave/ELK
+    - name: rpm install logstash
+      sudo: yes
+      yum: name=/home/vagrant/InstallSave/ELK/logstash-2.3.2-1.noarch.rpm state=present
+    - copy: src=/home/zbo/Downloads/elasticsearch-2.3.3.rpm dest=/home/vagrant/InstallSave/ELK
+    - name: configure logstash file
+      template: src=logstash.conf.j2 dest=/home/vagrant/logstash.conf
+    - copy: src=restart.sh dest=/home/vagrant/restart.sh
+#      notify: restart logstash
+    - name: restart logstash
+      shell: nohup sh restart.sh &
