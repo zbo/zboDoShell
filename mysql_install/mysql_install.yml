@@ -1,0 +1,7 @@
+---
+- hosts: vm2
+  remote_user: vagrant
+  gather_facts: True
+  roles:
+    - common
+    - mysql_install

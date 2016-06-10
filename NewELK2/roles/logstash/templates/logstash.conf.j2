@@ -1,11 +1,10 @@
 input {
     stdin {}
-    file {
-        path => "{{log_path}}"
-        start_position => end #beginning
-        ignore_older => 0
+    beats {
+        port => 5044
     }
 }
+
 filter {
     multiline {
         pattern => "^%{LOGLEVEL}"
@@ -14,19 +13,21 @@ filter {
     }
     grok {
         match =>[
-            "message", "%{LOGLEVEL:level}\s+\[%{TIMESTAMP_ISO8601:timepoint}\]\s+%{JAVACLASS:classname}\: %{GREEDYDATA:info}"
+            "message", "%{LOGLEVEL:level}\s+\[%{TIMESTAMP_ISO8601:logdate}\]\s+%{JAVACLASS:classname}\: %{GREEDYDATA:message}",
+            "message", "(?<logdate>[\d|-]+\s[\d|:]+,[\d]+)\s+(?<classname>[\w|.]+):\s\[(?<method>\w+)\]\s-(?<status>\d+)-\s(?<message>.+)"
         ]
         overwrite => ["message"]
     }
     date {
-        match => [ "timestamp" , "dd/MMM/yyyy:HH:mm:ss Z" ]
+        match => [ "logdate" , "yyyy-MM-dd HH:mm:ss,SSS" ]
     }
 }
 output{
     elasticsearch {
-        action => "index"
-        hosts  => "{{elastic_search_2}}:{{elastic_search_2_port}}"
-        index  => "{{index_name}}"
+        hosts => "192.168.33.12:9200"
+        manage_template => false
+        index => "%{[@metadata][beat]}-%{+YYYY.MM.dd}"
+        document_type => "%{[@metadata][type]}"
     }
     stdout {codec=>rubydebug}
 }

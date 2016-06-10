@@ -1,0 +1,5 @@
+---
+    - hosts: vm2
+      remote_user: vagrant
+      roles:
+        - mediawiki

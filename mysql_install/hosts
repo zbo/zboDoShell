@@ -1,0 +1,7 @@
+[vm2]
+192.168.33.11 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant ansible_sudo_pass=vagrant
+
+
+[vm2:vars]
+ip_address=192.168.33.11
+host=vm2

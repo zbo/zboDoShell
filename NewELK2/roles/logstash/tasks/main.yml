@@ -4,10 +4,26 @@
     - name: rpm install logstash
       sudo: yes
       yum: name=/home/vagrant/InstallSave/ELK/logstash-2.3.2-1.noarch.rpm state=present
-    - copy: src=/home/zbo/Downloads/elasticsearch-2.3.3.rpm dest=/home/vagrant/InstallSave/ELK
+
+    - copy: src=/home/zbo/Downloads/filebeat-1.2.3-x86_64.rpm dest=/home/vagrant/InstallSave/ELK
+    - name: rpm install filebeat
+      sudo: yes
+      yum: name=/home/vagrant/InstallSave/ELK/filebeat-1.2.3-x86_64.rpm state=present
+
     - name: configure logstash file
       template: src=logstash.conf.j2 dest=/home/vagrant/logstash.conf
+
+    - name: configure filebeat
+      sudo: yes
+      copy: src=filebeat.yml dest=/etc/filebeat/filebeat.yml
+
     - copy: src=restart.sh dest=/home/vagrant/restart.sh
+    - copy: src=generator.conf dest=/home/vagrant/generator.conf
+    - copy: src=beats.conf dest=/home/vagrant/beats.conf
 #      notify: restart logstash
     - name: restart logstash
       shell: nohup sh restart.sh &
+    - name: restart filebeat
+      sudo: yes
+      service: name=filebeat state=restarted
+

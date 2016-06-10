@@ -1,0 +1,13 @@
+---
+# This playbook contains common plays that will be run on all nodes.
+#    - file: path=/home/vagrant/InstallSave/Mediawiki state=directory
+    - name: stop fire wall
+      sudo: yes
+      shell: systemctl stop firewalld.service
+    - unarchive: src=/home/zbo/Downloads/mediawiki-1.23.14.tar.gz dest=/home/vagrant
+    - unarchive: src=/home/zbo/Downloads/MySQL-5.6.29-1.el7.x86_64.rpm-bundle.tar dest=/home/vagrant
+    - name: Create Application Database
+      mysql_db: name=mediawiki state=present
+
+    - name: Create Application DB User
+      mysql_user: name=wikiadm  password=123456 priv=*.*:ALL host='%' state=present
