@@ -1,0 +1,2 @@
+[server-135]
+10.197.32.135 ansible_ssh_user=devops ansible_ssh_pass=devops ansible_sudo_pass=devops

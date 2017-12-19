@@ -1,0 +1,6 @@
+---
+- hosts: server-135
+  remote_user: devops
+  tasks:
+    - name: make sure folder exists
+      file: path=/home/devops/InstallSave/ state=directory
